@@ -41,9 +41,10 @@ The homelab, defined as code in one repo. Atelier runs on it.
 
 ## dictate
 
-A macOS menu-bar dictation app: press a hotkey, speak, and cleaned-up text is pasted at the cursor.
+A macOS menu-bar dictation app, also on my iPhone through a Shortcut: press a hotkey, speak, and cleaned-up text lands at the cursor.
 
-- Transcription (whisper.cpp) and clean-up (a small Gemma model under Ollama) run as native daemons on a homelab node, reachable only over my private network. No cloud API.
+- Transcription (whisper.cpp) and clean-up (Gemma under Ollama) run as daemons on a homelab node over my private network; no cloud API. A custom vocabulary keeps my proper nouns spelled right, and model or prompt changes are A/B-tested on saved dictations first.
+- A failure costs a key press, not a re-dictation: a dropped request retries once, a failed recording waits for a one-key retry, and a failed clean-up pastes the raw transcript.
 - Swift 6 with strict concurrency, Swift Package Manager and AppKit, around a pure-Foundation core.
 
 ## Smaller projects

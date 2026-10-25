@@ -1,21 +1,22 @@
-Full-stack engineer with a Node.js, Python and AWS background. I build and run my own infrastructure. I work as architect, decision-maker and reviewer, and use agentic coding tools (Claude Code, Kiro) to accelerate implementation.
+Full-stack and platform engineer working in Python, TypeScript and AWS, with DevOps and production-operations roots. I work AI-first: I design the system, direct coding agents (Claude Code, Kiro) through implementation, and own review and production quality.
 
-The contribution graph is almost all private repositories. They run my household (finances, home network, personal data), so the code stays private. I'm happy to walk through the architecture on a call.
+My contribution graph is almost all private repositories, because they run my household: finances, home network and personal data. I'm happy to walk through the architecture on a call.
 
 ## Atelier
 
-One self-hosted app in place of the commercial products I used for budgeting, journaling, media tracking and portfolio tracking.
+One self-hosted app in place of the commercial products I used for budgeting, journaling, and media and portfolio tracking.
 
 ![Atelier front page, demo instance](assets/atelier-front-page.png)
 
 *Demo instance, fictional data.*
 
-- **Stack:** FastAPI, React and TypeScript on Vite, PostgreSQL, and an Ofelia scheduler running 28 cron jobs, all under Docker Compose. Read-only endpoints use a SELECT-only database role. Auth is JWT in httpOnly cookies with a sliding refresh token.
+- **Stack:** FastAPI, React and TypeScript on Vite, PostgreSQL, and an Ofelia scheduler running 30+ jobs, all under Docker Compose. Read-only endpoints use a SELECT-only database role. Auth is JWT in httpOnly cookies with a sliding refresh token.
 - **Households:** one deployment serves several households, each opened by invitation. PostgreSQL row-level security keeps their rows apart, and each household's jobs run on its own clock. Owners invite members, connect their own outside services and switch agent desks on.
 - **Modules (17):** accounts, transactions, portfolio, credit cards, bills, journal, todo, workouts, timeline, movies, TV, books, movie theater, maintenance, bar cart, coffee, travel log. Each reader chooses which ones appear.
 - **Finance:** SimpleFIN bank data lands twice a day as raw payloads, moves through vendor-shaped staging tables into canonical accounts, balances, transactions and holdings, and is reconciled weekly. Categories come from fuzzy matching against the ledger; an LLM-assisted review audits each month, and its corrections ship as reviewed migrations.
-- **Agents:** seven LLM analysts run outside the app as headless Claude Code sessions, reading through per-agent MCP endpoints and writing through scoped database roles. They file a month-close cash-flow report, a weekly digest and card-renewal reviews. A SQL check, never the model, decides whether my phone is notified.
-- **Notifications:** an in-app bulletins panel and APNs push to the iOS app.
+- **Agents:** seven LLM analysts run outside the app as headless Claude Code sessions, reading through per-agent MCP endpoints and writing through scoped database roles. They file a month-close cash-flow report, a weekly digest, card-renewal reviews, a weekly pick from the local cinema schedule, and travel entries drafted from photo metadata. A SQL check, never the model, decides whether my phone is notified.
+- **Operations:** image-based releases with rollback, post-deploy smoke tests, OpenTelemetry tracing, and nightly checks that open their own fix PRs.
+- **Notifications:** an in-app bulletins panel, APNs push to the iOS app and Web Push to browsers.
 - **Integrations:** 14 outside services, including SimpleFIN, TMDB, Google Books and the National Park Service API.
 - **iOS:** a thin Capacitor shell on my phone that loads the live web app over my private network, so frontend changes need no iOS rebuild.
 

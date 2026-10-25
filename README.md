@@ -1,4 +1,4 @@
-Full-stack and platform engineer working in Python, TypeScript and AWS, with DevOps and production-operations roots. I work AI-first: I design the system, direct coding agents (Claude Code, Kiro) through implementation, and own review and production quality.
+I'm a full-stack and platform engineer (Python, TypeScript, AWS). I work AI-first: I design the system, direct coding agents (Claude Code, Kiro) through the build, and own review and what ships.
 
 My contribution graph is almost all private repositories, because they run my household: finances, home network and personal data. I'm happy to walk through the architecture on a call.
 
@@ -6,9 +6,12 @@ My contribution graph is almost all private repositories, because they run my ho
 
 One self-hosted app in place of the commercial products I used for budgeting, journaling, and media and portfolio tracking.
 
-![Atelier front page, demo instance](assets/atelier-front-page.png)
+<p>
+  <img src="assets/atelier-front-page.png" alt="Atelier front page on desktop, demo instance" width="71%">
+  <img src="assets/atelier-phone.png" alt="Television section in the iOS app, demo instance" width="26%">
+</p>
 
-*Demo instance, fictional data.*
+*The front page on desktop and the television section in the iOS app. Demo instance, fictional data.*
 
 - **Stack:** FastAPI, React and TypeScript on Vite, PostgreSQL, and an Ofelia scheduler running 30+ jobs, all under Docker Compose. Read-only endpoints use a SELECT-only database role. Auth is JWT in httpOnly cookies with a sliding refresh token.
 - **Households:** one deployment serves several households, each opened by invitation. PostgreSQL row-level security keeps their rows apart, and each household's jobs run on its own clock. Owners invite members, connect their own outside services and switch agent desks on.
@@ -19,13 +22,6 @@ One self-hosted app in place of the commercial products I used for budgeting, jo
 - **Notifications:** an in-app bulletins panel, APNs push to the iOS app and Web Push to browsers.
 - **Integrations:** 14 outside services, including SimpleFIN, TMDB, Google Books and the National Park Service API.
 - **iOS:** a thin Capacitor shell on my phone that loads the live web app over my private network, so frontend changes need no iOS rebuild.
-
-<p>
-  <img src="assets/atelier-section.png" alt="Travel section, Atlas tab, on desktop" width="71%">
-  <img src="assets/atelier-phone.png" alt="Television section in the iOS app" width="26%">
-</p>
-
-*The travel section's Atlas tab on desktop, and the television section in the iOS app.*
 
 ## homedock
 
